@@ -63,6 +63,11 @@ class ForecastResult:
                 raise InvalidForecastResultError(
                     f"`point` has shape {point.shape}, expected ({n},) to match `timestamps`."
                 )
+            if not np.all(np.isfinite(point)):
+                raise InvalidForecastResultError(
+                    "`point` contains NaN/inf -- likely a gap or divergence in the "
+                    "upstream model output, not a valid forecast."
+                )
             point.setflags(write=False)
             object.__setattr__(self, "point", point)
 
@@ -76,6 +81,11 @@ class ForecastResult:
                 if arr.shape != (n,):
                     raise InvalidForecastResultError(
                         f"Quantile {level} has shape {arr.shape}, expected ({n},)."
+                    )
+                if not np.all(np.isfinite(arr)):
+                    raise InvalidForecastResultError(
+                        f"Quantile {level} contains NaN/inf -- likely a gap or divergence "
+                        "in the upstream model output, not a valid forecast."
                     )
                 arr.setflags(write=False)
                 normalized[level] = arr
