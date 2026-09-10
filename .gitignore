@@ -27,6 +27,9 @@ htmlcov/
 # Jupyter
 .ipynb_checkpoints/
 
+# ML training artifacts from adapter integration tests (neuralforecast/pytorch-lightning)
+lightning_logs/
+
 # Data (never commit raw data, see DATA_SOURCES.md)
 data/real/raw/
 data/real/cache/

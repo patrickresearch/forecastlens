@@ -109,3 +109,20 @@ def test_timestamps_accepts_list_of_dates():
 def test_invalid_timestamps_raise():
     with pytest.raises(InvalidForecastResultError):
         ForecastResult(timestamps=["not-a-date", "also-not"], freq="D", point=[1.0, 2.0])
+
+
+def test_nan_in_point_raises():
+    with pytest.raises(InvalidForecastResultError):
+        ForecastResult(timestamps=_timestamps(), freq="D", point=[1.0, np.nan, 3.0])
+
+
+def test_inf_in_point_raises():
+    with pytest.raises(InvalidForecastResultError):
+        ForecastResult(timestamps=_timestamps(), freq="D", point=[1.0, np.inf, 3.0])
+
+
+def test_nan_in_quantile_raises():
+    with pytest.raises(InvalidForecastResultError):
+        ForecastResult(
+            timestamps=_timestamps(), freq="D", quantiles={0.5: [1.0, np.nan, 3.0]}
+        )
