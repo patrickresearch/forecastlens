@@ -39,3 +39,11 @@ class LeakageError(ForecastLensError):
 
 class InvalidGeneratorConfigError(ForecastLensError):
     """Raised when a synthetic generator is configured with inconsistent parameters."""
+
+
+class InvalidDetectorConfigError(ForecastLensError):
+    """Raised when a regime detector is configured with inconsistent parameters."""
+
+
+class DegenerateSeriesError(ForecastLensError):
+    """Raised when a statistic (e.g. variance) needed by a detector is undefined for the input."""

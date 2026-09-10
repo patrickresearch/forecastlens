@@ -23,7 +23,3 @@ pytest tests/unit          # fast, no heavy framework dependencies
 pytest tests/integration   # requires darts/neuralforecast installed
 ```
 
-## Code style
-
-- `ruff` for linting/formatting, `mypy` for type checking — both run via pre-commit.
-- Comments in English, WHY not WHAT — see `CLAUDE.md` for the exact style guidance.
