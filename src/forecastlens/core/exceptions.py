@@ -22,3 +22,16 @@ class MissingQuantilesError(ForecastLensError):
 
 class UnrecognizedAdapterFormatError(ForecastLensError):
     """Raised when an adapter receives a framework output it does not know how to normalize."""
+
+
+class InsufficientDataError(ForecastLensError):
+    """Raised when there is not enough data to produce a single valid split/window."""
+
+
+class LeakageError(ForecastLensError):
+    """Raised when a computed split/window would let training data see future data.
+
+    This is a hard defensive assertion, not a normal user-facing validation
+    error -- it should be geometrically impossible to trigger for valid
+    parameters and exists to catch bugs in the splitting logic itself.
+    """

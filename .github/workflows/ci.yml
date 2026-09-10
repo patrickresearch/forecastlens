@@ -42,4 +42,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[test,all]"
-      - run: pytest tests/integration -v
+      - name: Run integration tests
+        run: |
+          pytest tests/integration -v
+          code=$?
+          # exit code 5 = no tests collected -- expected until Phase 2 adapters land.
+          if [ "$code" -eq 5 ]; then
+            echo "No integration tests yet, treating as pass."
+            exit 0
+          fi
+          exit "$code"
