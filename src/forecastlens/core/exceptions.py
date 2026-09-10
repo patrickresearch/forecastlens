@@ -47,3 +47,15 @@ class InvalidDetectorConfigError(ForecastLensError):
 
 class DegenerateSeriesError(ForecastLensError):
     """Raised when a statistic (e.g. variance) needed by a detector is undefined for the input."""
+
+
+class InvalidDecisionConfigError(ForecastLensError):
+    """Raised when a decision model, bucket definition, or cost matrix is misconfigured."""
+
+
+class ZeroNaiveCostError(ForecastLensError):
+    """Raised when ``relative_value_score`` would divide by a zero naive-baseline cost."""
+
+
+class MismatchedLengthError(ForecastLensError):
+    """Raised when a forecast's horizon and the realized/ground-truth array lengths differ."""
