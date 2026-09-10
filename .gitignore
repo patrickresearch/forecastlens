@@ -27,6 +27,9 @@ htmlcov/
 # Jupyter
 .ipynb_checkpoints/
 
+# mkdocs build output
+site/
+
 # ML training artifacts from adapter integration tests (neuralforecast/pytorch-lightning)
 lightning_logs/
 

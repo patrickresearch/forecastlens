@@ -1,0 +1,60 @@
+site_name: ForecastLens
+site_description: >-
+  Diagnostic layer for time-series forecasts: regime-aware calibration,
+  leak-safe backtesting, and economic decision-value evaluation.
+repo_url: https://github.com/forecastlens/forecastlens
+repo_name: forecastlens
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+            docstring_style: numpy
+            show_root_heading: true
+            merge_init_into_class: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - tables
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Concepts:
+      - Economic value layer: concepts/economic-value.md
+      - Regime-aware evaluation: concepts/regime-aware.md
+  - API Reference:
+      - core: api/core.md
+      - adapters: api/adapters.md
+      - metrics: api/metrics.md
+      - backtesting: api/backtesting.md
+      - regime: api/regime.md
+      - decision: api/decision.md
+      - evaluators: api/evaluators.md
+      - synthetic: api/synthetic.md

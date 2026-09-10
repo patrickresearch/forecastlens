@@ -45,6 +45,10 @@ dev = [
     "pandas-stubs",
     "pre-commit>=3.6",
 ]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.25",
+]
 
 [project.urls]
 Homepage = "https://github.com/forecastlens/forecastlens"

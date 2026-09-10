@@ -48,9 +48,20 @@ jobs:
           pytest tests/integration -v
           code=$?
           set -e
-          # exit code 5 = no tests collected -- expected until Phase 2 adapters land.
+          # exit code 5 = no tests collected; defensive fallback in case a future
+          # test selection filters everything out -- should not happen normally.
           if [ "$code" -eq 5 ]; then
-            echo "No integration tests yet, treating as pass."
+            echo "No integration tests collected, treating as pass."
             exit 0
           fi
           exit "$code"
+
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[docs]"
+      - run: mkdocs build --strict
