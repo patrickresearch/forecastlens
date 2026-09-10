@@ -1,0 +1,6 @@
+# Installs forecastlens straight from the GitHub repo since it isn't on PyPI
+# yet -- swap this line for `forecastlens` once the package is released.
+git+https://github.com/forecastlens/forecastlens.git
+
+gradio>=4.0
+matplotlib>=3.7
