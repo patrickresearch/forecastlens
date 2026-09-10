@@ -35,3 +35,7 @@ class LeakageError(ForecastLensError):
     error -- it should be geometrically impossible to trigger for valid
     parameters and exists to catch bugs in the splitting logic itself.
     """
+
+
+class InvalidGeneratorConfigError(ForecastLensError):
+    """Raised when a synthetic generator is configured with inconsistent parameters."""
