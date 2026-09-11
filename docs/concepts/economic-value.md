@@ -14,7 +14,7 @@ The strongest business story of the two, because the output is a euro-per-unit f
 2. `decision_rule.should_wait(current_price, forecast.median()[t:])` looks only at the *original* forecast's remaining horizon — never at any later day's realized price.
 3. If the rule says wait, move to `t + 1`. If it says buy, or the deadline (`t == deadline_horizon - 1`) is reached, purchase at `current_price`.
 
-This is the leak-safety guarantee ROADMAP.md calls out explicitly: the decision at time `t` uses only the forecast that was already available and today's own price, never tomorrow's. `tests/unit/decision/test_procurement_timing.py::test_decision_unaffected_by_realized_prices_after_buy_day_leak_safety` asserts this directly — mutating realized prices after the simulated buy day cannot change the outcome.
+This is the leak-safety guarantee roadmap.md calls out explicitly: the decision at time `t` uses only the forecast that was already available and today's own price, never tomorrow's. `tests/unit/decision/test_procurement_timing.py::test_decision_unaffected_by_realized_prices_after_buy_day_leak_safety` asserts this directly — mutating realized prices after the simulated buy day cannot change the outcome.
 
 **Why a deadline is mandatory, not optional.** Without `deadline_horizon`, the simulated strategy could "wait forever," a strategy no real procurement process would allow and one that would make the model look artificially good in a backtest. `ThresholdTimingRule` can say "wait" every single day; the deadline forces a purchase regardless.
 
@@ -28,7 +28,7 @@ Classifies both the forecast and the realized value into the same decision-relev
 
 **The naive baseline is a one-step persistence forecast** (`realized[t-1]`), the same convention MASE uses for its scale — not an arbitrary choice, but consistency across the codebase's various "what would a naive forecast have cost" comparisons.
 
-**Without a `CostMatrix`, you get a confusion matrix and hit rate, nothing else.** `evaluate()` never fabricates a cost or a value score when you haven't told it what a misclassification actually costs — that would be an implicit "all errors cost the same" assumption ROADMAP.md explicitly rules out.
+**Without a `CostMatrix`, you get a confusion matrix and hit rate, nothing else.** `evaluate()` never fabricates a cost or a value score when you haven't told it what a misclassification actually costs — that would be an implicit "all errors cost the same" assumption roadmap.md explicitly rules out.
 
 ## `relative_value_score`: read this before citing it
 

@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "forecastlens"
 version = "0.1.0"
 description = "Diagnostic layer for time-series forecasts: regime-aware calibration, leak-safe backtesting, and economic decision-value evaluation on top of darts/neuralforecast outputs."
-readme = "README.md"
+readme = "readme.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.10"
 authors = [{ name = "Patrick Petter" }]
@@ -53,7 +53,7 @@ docs = [
 [project.urls]
 Homepage = "https://github.com/patrickresearch/forecastlens"
 Repository = "https://github.com/patrickresearch/forecastlens"
-Changelog = "https://github.com/patrickresearch/forecastlens/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/patrickresearch/forecastlens/blob/main/changelog.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/forecastlens"]

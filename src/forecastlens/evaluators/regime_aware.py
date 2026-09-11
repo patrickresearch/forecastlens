@@ -4,7 +4,7 @@ Splits CRPS/WQL/calibration/MAE/RMSE/WAPE by the regime detected in the
 *realized* series -- the point isn't how well the forecast predicts
 regimes, it's whether accuracy holds up once you stop averaging away the
 very regime shifts that make the forecasting problem hard in the first
-place (ROADMAP.md's core motivation). The `overall_*` fields are exactly
+place (roadmap.md's core motivation). The `overall_*` fields are exactly
 what you'd get applying each metric the ordinary way, over the whole
 period with no segmentation -- comparing them against `per_regime` is the
 point of this evaluator, not an afterthought.
