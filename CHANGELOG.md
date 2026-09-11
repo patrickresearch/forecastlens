@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - Unreleased
+## [0.1.0] - 2026-09-11
 
 Initial pre-release. API may still change without notice.
 
@@ -21,5 +21,8 @@ Initial pre-release. API may still change without notice.
 - `regime`: `VolatilityRegimeDetector` and `CUSUMDetector`, both implementing a shared, swappable interface, validated against the synthetic presets' ground truth.
 - `adapters`: `DartsAdapter`, `NeuralForecastAdapter`, and a framework-free `RawAdapter`, all normalizing into `ForecastResult`; adapter integration tests train real (tiny) models rather than mocking.
 - `decision`: `DecisionRelevantBucketAccuracy` (cost-weighted confusion matrix over causally-defined buckets) and `ProcurementTimingModel` (buy-now-vs-wait simulation with a euro-per-unit result), plus the shared `relative_value_score` — explicitly a simplified MVP metric, not the academic Murphy value score.
-- `evaluators`: `DemandForecastEvaluator` (WMAPE, bias, intermittency, service level) and `RegimeAwareEvaluator` (regime-conditional CRPS/WQL/calibration).
+- `evaluators`: `DemandForecastEvaluator` (WMAPE, bias, intermittency, service level) and `RegimeAwareEvaluator` (regime-conditional CRPS/WQL/calibration/MAE/RMSE/WAPE/accuracy, plus whole-period `overall_*` fields for direct before/after comparison).
+- `metrics`: `mae`, `rmse`, `wape`, and `forecast_accuracy` (= 1 - WAPE, the FP&A convention).
+- `regime.ClusteredRegimeDetector`: wraps any detector and merges raw segments with statistically similar mean levels via agglomerative clustering, so a detector that assigns a new label to every changepoint (e.g. `CUSUMDetector`) collapses back to however many genuinely distinct regimes exist.
 - Documentation: README quickstarts, `mkdocs-material` API reference and concept guides, two executed end-to-end tutorial notebooks (`examples/`).
+- `web_demo/`: interactive Gradio demo (Regime-Aware Evaluation, Procurement Timing, and a metrics Glossary tab), deployable to Render (`render.yaml`).
