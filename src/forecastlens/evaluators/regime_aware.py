@@ -1,10 +1,13 @@
 """Regime-conditional evaluator for energy/commodity-style forecasts.
 
-Splits CRPS/WQL/calibration by the regime detected in the *realized*
-series -- the point isn't how well the forecast predicts regimes, it's
-whether accuracy holds up once you stop averaging away the very regime
-shifts that make the forecasting problem hard in the first place
-(ROADMAP.md's core motivation).
+Splits CRPS/WQL/calibration/MAE/RMSE/WAPE by the regime detected in the
+*realized* series -- the point isn't how well the forecast predicts
+regimes, it's whether accuracy holds up once you stop averaging away the
+very regime shifts that make the forecasting problem hard in the first
+place (ROADMAP.md's core motivation). The `overall_*` fields are exactly
+what you'd get applying each metric the ordinary way, over the whole
+period with no segmentation -- comparing them against `per_regime` is the
+point of this evaluator, not an afterthought.
 """
 
 from __future__ import annotations
@@ -17,6 +20,7 @@ import numpy as np
 
 from forecastlens.core.exceptions import MismatchedLengthError, MissingQuantilesError
 from forecastlens.metrics.crps import crps_from_quantiles
+from forecastlens.metrics.point import forecast_accuracy, mae, rmse, wape
 from forecastlens.metrics.wql import mean_weighted_quantile_loss
 
 if TYPE_CHECKING:
@@ -34,13 +38,17 @@ def _calibration(y_true: np.ndarray, quantiles: Mapping[float, np.ndarray]) -> d
 
 @dataclass(frozen=True)
 class RegimeMetrics:
-    """CRPS/WQL/calibration restricted to one detected regime's periods."""
+    """CRPS/WQL/calibration/MAE/RMSE/WAPE/accuracy restricted to one detected regime's periods."""
 
     regime_label: int
     n_periods: int
     crps: float
     wql: float
     calibration: dict[float, float]
+    mae: float
+    rmse: float
+    wape: float
+    accuracy: float
 
 
 @dataclass(frozen=True)
@@ -48,6 +56,10 @@ class RegimeAwareEvaluationReport:
     overall_crps: float
     overall_wql: float
     overall_calibration: dict[float, float]
+    overall_mae: float
+    overall_rmse: float
+    overall_wape: float
+    overall_accuracy: float
     per_regime: tuple[RegimeMetrics, ...]
     regime_labels: np.ndarray
     changepoints: tuple[int, ...]
@@ -82,15 +94,18 @@ class RegimeAwareEvaluator:
 
         detection = self.regime_detector.detect(y_true_arr)
         regimes = detection.regime_labels
+        median = forecast.median()
 
         overall_crps = float(np.mean(crps_from_quantiles(y_true_arr, quantiles)))
         overall_wql = mean_weighted_quantile_loss(y_true_arr, quantiles)
         overall_calibration = _calibration(y_true_arr, quantiles)
+        overall_wape = wape(y_true_arr, median)
 
         per_regime = []
         for label in sorted(set(regimes.tolist())):
             mask = regimes == label
             y_true_sub = y_true_arr[mask]
+            median_sub = median[mask]
             quantiles_sub = {level: arr[mask] for level, arr in quantiles.items()}
             per_regime.append(
                 RegimeMetrics(
@@ -99,6 +114,10 @@ class RegimeAwareEvaluator:
                     crps=float(np.mean(crps_from_quantiles(y_true_sub, quantiles_sub))),
                     wql=mean_weighted_quantile_loss(y_true_sub, quantiles_sub),
                     calibration=_calibration(y_true_sub, quantiles_sub),
+                    mae=mae(y_true_sub, median_sub),
+                    rmse=rmse(y_true_sub, median_sub),
+                    wape=wape(y_true_sub, median_sub),
+                    accuracy=forecast_accuracy(y_true_sub, median_sub),
                 )
             )
 
@@ -106,6 +125,10 @@ class RegimeAwareEvaluator:
             overall_crps=overall_crps,
             overall_wql=overall_wql,
             overall_calibration=overall_calibration,
+            overall_mae=mae(y_true_arr, median),
+            overall_rmse=rmse(y_true_arr, median),
+            overall_wape=overall_wape,
+            overall_accuracy=1.0 - overall_wape,
             per_regime=tuple(per_regime),
             regime_labels=regimes,
             changepoints=detection.changepoints,

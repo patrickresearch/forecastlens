@@ -75,6 +75,13 @@ packages = ["forecastlens"]
 module = ["darts.*", "neuralforecast.*"]
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+# scipy-stubs pulls in a numpy floor that conflicts with sktime's <2.5 pin
+# and, on top of that, ships .pyi files using 3.12+ syntax our py3.10 mypy
+# target can't parse -- not worth the churn for one hierarchical-clustering call.
+module = ["scipy.cluster.hierarchy"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--cov=forecastlens --cov-report=term-missing"
