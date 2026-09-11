@@ -2,7 +2,7 @@ site_name: ForecastLens
 site_description: >-
   Diagnostic layer for time-series forecasts: regime-aware calibration,
   leak-safe backtesting, and economic decision-value evaluation.
-repo_url: https://github.com/forecastlens/forecastlens
+repo_url: https://github.com/patrickresearch/forecastlens
 repo_name: forecastlens
 
 theme:

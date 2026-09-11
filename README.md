@@ -1,6 +1,6 @@
 # ForecastLens
 
-[![CI](https://github.com/forecastlens/forecastlens/actions/workflows/ci.yml/badge.svg)](https://github.com/forecastlens/forecastlens/actions/workflows/ci.yml)
+[![CI](https://github.com/patrickresearch/forecastlens/actions/workflows/ci.yml/badge.svg)](https://github.com/patrickresearch/forecastlens/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/forecastlens.svg)](https://pypi.org/project/forecastlens/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 

@@ -51,9 +51,9 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/forecastlens/forecastlens"
-Repository = "https://github.com/forecastlens/forecastlens"
-Changelog = "https://github.com/forecastlens/forecastlens/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/patrickresearch/forecastlens"
+Repository = "https://github.com/patrickresearch/forecastlens"
+Changelog = "https://github.com/patrickresearch/forecastlens/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/forecastlens"]

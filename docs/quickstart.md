@@ -1,6 +1,6 @@
 # Quickstart
 
-Both examples below use `forecastlens.synthetic` — zero setup, no API keys, and every preset ships with known ground truth (regime changes, promo dates, disruption windows) so you can validate against a controlled series before pointing ForecastLens at real data. Full runnable notebooks live in [`examples/`](https://github.com/forecastlens/forecastlens/tree/main/examples).
+Both examples below use `forecastlens.synthetic` — zero setup, no API keys, and every preset ships with known ground truth (regime changes, promo dates, disruption windows) so you can validate against a controlled series before pointing ForecastLens at real data. Full runnable notebooks live in [`examples/`](https://github.com/patrickresearch/forecastlens/tree/main/examples).
 
 ## Economic value of waiting on a forecast
 
