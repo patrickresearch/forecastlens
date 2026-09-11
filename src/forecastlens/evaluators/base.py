@@ -1,4 +1,4 @@
-"""Shared conceptual interface for evaluators (ROADMAP.md Section 2).
+"""Shared conceptual interface for evaluators (roadmap.md Section 2).
 
 `DemandForecastEvaluator` and `RegimeAwareEvaluator` each return a
 purpose-specific report dataclass rather than a common one -- a demand

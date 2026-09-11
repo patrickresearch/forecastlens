@@ -1,4 +1,4 @@
-"""Shared conceptual interface for decision models (ROADMAP.md 1.5).
+"""Shared conceptual interface for decision models (roadmap.md 1.5).
 
 `DecisionRelevantBucketAccuracy` and `ProcurementTimingModel` each expose a
 richer, purpose-specific `evaluate()` method rather than this Protocol's

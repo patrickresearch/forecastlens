@@ -4,7 +4,7 @@
 academic Murphy value score (which normalizes against a perfect-foresight
 forecast on a 0-1 scale, per Murphy 1973 / Gneiting & Raftery 2007). Ours
 can go negative (model worse than naive) or exceed 1 (naive cost near
-zero) -- see ROADMAP.md 1.5. A full Murphy-normalized score is a v0.2
+zero) -- see roadmap.md 1.5. A full Murphy-normalized score is a v0.2
 opt-in, not part of this MVP.
 """
 

@@ -19,7 +19,7 @@ class BucketAccuracyReport:
 
     `total_cost`, `cost_naive`, and `value_score` are `None` whenever no
     `CostMatrix` was supplied -- callers get confusion-matrix/hit-rate only,
-    never an implicit "all errors cost the same" assumption (ROADMAP.md 1.5).
+    never an implicit "all errors cost the same" assumption (roadmap.md 1.5).
     """
 
     confusion_matrix: np.ndarray
