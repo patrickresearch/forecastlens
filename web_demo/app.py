@@ -1,12 +1,14 @@
-"""ForecastLens demo Space.
+"""ForecastLens web demo.
 
 Uses ForecastLens to *diagnose* forecasts against synthetic data with known
 ground truth -- it does not train new forecasting models. Kept entirely
 outside src/ and out of the PyPI package: a separate deploy target with its
-own requirements.txt.
+own requirements.txt, deployable to Render (see render.yaml) or run locally.
 """
 
 from __future__ import annotations
+
+import os
 
 import gradio as gr
 import matplotlib.pyplot as plt
@@ -160,4 +162,7 @@ with gr.Blocks(title="ForecastLens Demo") as demo:
         )
 
 if __name__ == "__main__":
-    demo.launch()
+    # Render (and most PaaS hosts) assign the port via $PORT and expect the
+    # process to bind 0.0.0.0; falls back to Gradio's local default otherwise.
+    port = int(os.environ.get("PORT", 7860))
+    demo.launch(server_name="0.0.0.0", server_port=port)
