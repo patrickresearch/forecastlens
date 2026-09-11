@@ -117,7 +117,7 @@ with gr.Blocks(title="ForecastLens Demo") as demo:
         "# ForecastLens Demo\n"
         "Diagnoses forecasts against synthetic data with known ground truth -- "
         "does not train new forecasting models. "
-        "[GitHub](https://github.com/forecastlens/forecastlens)"
+        "[GitHub](https://github.com/patrickresearch/forecastlens)"
     )
 
     with gr.Tab("Regime-Aware Evaluation"):

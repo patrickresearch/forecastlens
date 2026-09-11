@@ -5,7 +5,7 @@ Interactive demo of two ForecastLens diagnostics, running entirely on `forecastl
 - **Regime-Aware Evaluation** — compares `VolatilityRegimeDetector` and `CUSUMDetector` against a price series' true regime changes, and shows per-regime CRPS/WQL.
 - **Procurement Timing** — simulates `ProcurementTimingModel`'s buy-now-vs-wait decision and reports the result in currency per unit.
 
-This demo uses ForecastLens to **diagnose** forecasts, not to train new forecasting models. See the [main repository](https://github.com/forecastlens/forecastlens) for the package itself.
+This demo uses ForecastLens to **diagnose** forecasts, not to train new forecasting models. See the [main repository](https://github.com/patrickresearch/forecastlens) for the package itself.
 
 ## Run locally
 
