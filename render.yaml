@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: forecastlens-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r web_demo/requirements.txt
+    startCommand: python web_demo/app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
